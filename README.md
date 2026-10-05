@@ -1,12 +1,25 @@
-# Tugas Pemrograman Berorientasi Objek - Manajemen Pertunjukan
+# TP3DPBO2526C
+
+# Tugas Praktikum 3 DPBO
 
 ## Janji
-Saya yang bernama **[Nama Kamu]** dengan NIM **[NIM Kamu]** mengerjakan tugas **[Nama Tugas/Praktikum]** dalam mata kuliah **[Nama Mata Kuliah]** untuk keberkahan-Nya maka saya tidak melakukan kecurangan seperti yang telah dispesifikasikan. Aamiin.
+
+Saya Ingrid Gabryella Nainggolan dengan NIM 2506442 mengerjakan TP 3 dalam mata kuliah Desain dan Pemrograman Berorientasi Objek untuk keberkahan-Nya maka saya tidak melakukan kecurangan seperti yang telah dispesifikasikan. Aamiin.
 
 ---
 
 ## Desain Diagram Program
-Diagram di bawah ini merepresentasikan hubungan antar class (Inheritance dan Composition) dalam program:
+
+Diagram di bawah ini merepresentasikan hubungan antar class yang digunakan dalam program, yaitu **Hierarchical Inheritance, Composition, dan Aggregation**.
+
+<img src="diagram_tp3.png" width="600">
+
+### Keterangan Hubungan Antar Class
+
+- **Hierarchical Inheritance**: `Pertunjukan` merupakan class induk dari `Drama`, `Musikal`, dan `Komedi`.
+- **Composition**: `Pertunjukan` memiliki `Naskah` dan `Panggung` sebagai bagian dari sebuah pertunjukan.
+- **Aggregation**: `Pertunjukan` memiliki kumpulan objek `Aktor` yang dibuat sebagai objek tersendiri.
+- **Array of Object**: kumpulan objek `Aktor` disimpan dalam list pada Python dan kumpulan pointer objek `Aktor` pada C++.
 
 ---
 
@@ -226,9 +239,9 @@ Program menggunakan konsep **Hierarchical Inheritance**, yaitu satu kelas induk 
 Kelas `Pertunjukan` menjadi kelas induk yang diturunkan menjadi tiga kelas:
 
 ```text
-              Pertunjukan
-             /     |      \
-         Drama  Musikal  Komedi
+                Pertunjukan
+               /     |     \
+           Drama   Musikal  Komedi
 ```
 
 Dengan desain tersebut, atribut dan method umum yang dimiliki oleh pertunjukan dapat digunakan kembali oleh kelas turunannya.
@@ -246,11 +259,8 @@ Program menggunakan konsep **Composition** antara kelas `Pertunjukan` dengan kel
 Hubungannya adalah:
 
 ```text
-Pertunjukan
-    |
-    +-- Naskah
-    |
-    +-- Panggung
+Pertunjukan ◆── Naskah
+            ◆── Panggung
 ```
 
 Objek `Naskah` dimasukkan ke dalam objek `Pertunjukan` menggunakan method `setNaskah()`.
@@ -261,7 +271,25 @@ Dengan demikian, `Naskah` dan `Panggung` menjadi bagian dari sebuah `Pertunjukan
 
 ---
 
-### 3. Array of Object
+### 3. Aggregation
+
+Program menggunakan konsep **Aggregation** antara kelas `Pertunjukan` dengan kelas `Aktor`.
+
+Hubungannya adalah:
+
+```text
+Pertunjukan ◇── Aktor
+```
+
+Objek `Aktor` dibuat secara terpisah dan kemudian dikumpulkan sebagai daftar aktor yang terlibat dalam suatu pertunjukan.
+
+Daftar objek tersebut kemudian dimasukkan ke dalam objek `Pertunjukan` menggunakan method `setDaftarAktor()`.
+
+Aggregation digunakan karena satu pertunjukan dapat memiliki beberapa aktor dan objek aktor tersebut merupakan objek yang berdiri sendiri.
+
+---
+
+### 4. Array of Object
 
 Program juga menerapkan **Array of Object** untuk menyimpan beberapa objek `Aktor`.
 
@@ -277,58 +305,54 @@ aktor_hamilton = [
 
 Daftar tersebut kemudian dimasukkan ke dalam objek `Pertunjukan` menggunakan method `setDaftarAktor()`.
 
-Pada C++, konsep yang sama diterapkan menggunakan kumpulan objek `Aktor` yang disimpan melalui `Aktor**`.
+Pada C++, konsep yang sama diterapkan menggunakan kumpulan pointer objek `Aktor`.
 
 Array of Object digunakan agar satu pertunjukan dapat memiliki lebih dari satu aktor.
 
 ---
 
-## Alur Program
-
-Alur program dibuat sama secara konsep pada setiap bahasa pemrograman yang digunakan.
-
-1. Program membuat objek `Naskah` dan `Panggung`.
-2. Program membuat beberapa objek `Aktor` sebagai Array of Object.
-3. Program membuat objek `Pertunjukan` berupa `Musikal`, `Drama`, atau `Komedi`.
-4. Objek `Naskah` dimasukkan ke dalam objek `Pertunjukan` menggunakan `setNaskah()`.
-5. Objek `Panggung` dimasukkan ke dalam objek `Pertunjukan` menggunakan `setPanggung()`.
-6. Array of Object `Aktor` dimasukkan menggunakan `setDaftarAktor()`.
-7. Beberapa objek pertunjukan disimpan ke dalam Array of Object utama.
-8. Program menampilkan seluruh data pertunjukan sebelum dilakukan penambahan.
-9. Program membuat objek pertunjukan baru beserta naskah, panggung, dan aktornya.
-10. Objek pertunjukan baru ditambahkan ke dalam Array of Object utama.
-11. Program menampilkan seluruh data pertunjukan setelah dilakukan penambahan.
-12. Data ditampilkan menggunakan getter dari masing-masing objek.
-
-Secara sederhana, alurnya adalah:
+## Struktur File
 
 ```text
-Membuat Naskah
-       |
-       v
-Membuat Panggung
-       |
-       v
-Membuat Array of Object Aktor
-       |
-       v
-Membuat Pertunjukan
-       |
-       v
-Menghubungkan Naskah + Panggung + Aktor
-       |
-       v
-Menyimpan ke Array of Object Pertunjukan
-       |
-       v
-Menampilkan Data Sebelum Penambahan
-       |
-       v
-Menambahkan Pertunjukan Baru
-       |
-       v
-Menampilkan Data Setelah Penambahan
+TP3DPBO2526C/
+│
+├── Python/
+│   ├── Dokumentasi/
+│   │   ├── data_awal_py.png
+│   │   ├── add_data_hasil_1_py.png
+│   │   └── add_data_hasil_2_py.png
+│   │
+│   └── Program/
+│       ├── Pertunjukan.py
+│       ├── Drama.py
+│       ├── Komedi.py
+│       ├── Musikal.py
+│       ├── Naskah.py
+│       ├── Aktor.py
+│       ├── Panggung.py
+│       └── Main.py
+│
+├── CPP/
+│   ├── Dokumentasi/
+│   │   ├── data_awal_cpp.png
+│   │   ├── add_data_hasil_1_cpp.png
+│   │   └── add_data_hasil_2_cpp.png
+│   │
+│   └── Program/
+│       ├── Pertunjukan.cpp
+│       ├── Drama.cpp
+│       ├── Komedi.cpp
+│       ├── Musikal.cpp
+│       ├── Naskah.cpp
+│       ├── Aktor.cpp
+│       ├── Panggung.cpp
+│       └── Main.cpp
+│
+├── diagram_tp3.png
+└── README.md
 ```
+
+Folder `Dokumentasi` digunakan untuk menyimpan screenshot hasil program dari setiap bahasa pemrograman.
 
 ---
 
@@ -338,66 +362,42 @@ Dokumentasi berisi screenshot atau screenrecord dari hasil implementasi program 
 
 ### Python
 
-Screenshot atau screenrecord hasil implementasi program menggunakan Python:
+- Tampilan data awal.
 
-![Dokumentasi Python](dokumentasi/python.png)
+<img src="Python/Dokumentasi/data_awal_py.png" width="600">
+
+- Tampilan data setelah ditambahkan.
+
+<img src="Python/Dokumentasi/add_data_hasil_1_py.png" width="600">
+
+<img src="Python/Dokumentasi/add_data_hasil_2_py.png" width="600">
 
 ---
 
 ### C++
 
-Screenshot atau screenrecord hasil implementasi program menggunakan C++:
+- Tampilan data awal.
 
-![Dokumentasi C++](dokumentasi/cpp.png)
+<img src="CPP/Dokumentasi/data_awal_cpp.png" width="600">
 
----
+- Tampilan data setelah ditambahkan.
 
-### Java
+<img src="CPP/Dokumentasi/add_data_hasil_1_cpp.png" width="600">
 
-Screenshot atau screenrecord hasil implementasi program menggunakan Java:
-
-![Dokumentasi Java](dokumentasi/java.png)
-
----
-
-### PHP
-
-Screenshot atau screenrecord hasil implementasi program menggunakan PHP:
-
-![Dokumentasi PHP](dokumentasi/php.png)
-
----
-
-## Struktur Folder
-
-Struktur folder dokumentasi dapat dibuat seperti berikut:
-
-```text
-.
-├── README.md
-├── Python/
-├── C++/
-├── Java/
-├── PHP/
-└── dokumentasi/
-    ├── python.png
-    ├── cpp.png
-    ├── java.png
-    └── php.png
-```
-
-Folder `dokumentasi` digunakan untuk menyimpan screenshot hasil program dari setiap bahasa pemrograman.
+<img src="CPP/Dokumentasi/add_data_hasil_2_cpp.png" width="600">
 
 ---
 
 ## Kesimpulan
 
-Program Manajemen Pertunjukan menerapkan konsep Pemrograman Berorientasi Objek berupa **Hierarchical Inheritance**, **Composition**, dan **Array of Object**.
+Program Manajemen Pertunjukan menerapkan konsep Pemrograman Berorientasi Objek berupa **Hierarchical Inheritance**, **Composition**, **Aggregation**, dan **Array of Object**.
 
 Hierarchical Inheritance diterapkan dengan menjadikan `Pertunjukan` sebagai kelas induk dari `Drama`, `Musikal`, dan `Komedi`.
 
 Composition diterapkan dengan menghubungkan `Pertunjukan` dengan `Naskah` dan `Panggung`.
 
+Aggregation diterapkan dengan menghubungkan `Pertunjukan` dengan kumpulan objek `Aktor` yang dibuat secara terpisah.
+
 Array of Object diterapkan untuk menyimpan beberapa objek `Aktor` dalam satu pertunjukan dan beberapa objek `Pertunjukan` dalam program utama.
 
-Program juga menggunakan setter dan getter untuk mengakses serta mengubah data setiap objek. Data ditampilkan sebelum dan sesudah dilakukan penambahan objek pertunjukan sehingga penerapan konsep OOP dapat terlihat melalui hasil program.# TP3DPBO2526C2
+Program juga menggunakan setter dan getter untuk mengakses serta mengubah data setiap objek. Data ditampilkan sebelum dan sesudah dilakukan penambahan objek pertunjukan sehingga penerapan konsep OOP dapat terlihat melalui hasil program.
