@@ -1,5 +1,3 @@
-# TP3DPBO2526C
-
 # Tugas Praktikum 3 DPBO
 
 ## Janji
