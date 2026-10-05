@@ -181,7 +181,7 @@ if __name__ == "__main__":
     bunga.setPanggung(panggung3)
     bunga.setDaftarAktor(aktor_bunga)
 
-    # Menyiapkan data pertunjukan kelima berjenis Komedi
+    # Menyiapkan data pertunjukan keempat berjenis Komedi
     naskah4 = Naskah("NSK-04", "Raditya Dika", 100, "Indonesia")
     panggung4 = Panggung("PNG-E", "Teater Jakarta", 500, "Proscenium")
     aktor_komedi = [
@@ -190,7 +190,7 @@ if __name__ == "__main__":
         Aktor("AKT-12", "Ge Pamungkas", 37, "Pemeran Pendukung", 10)
     ]
 
-    komedi = Komedi("PRT-05", "Cinta Dalam Komedi", 115, "Ernest Prakasa", "Satire", "Percintaan", "Tinggi")
+    komedi = Komedi("PRT-04", "Cinta Dalam Komedi", 115, "Ernest Prakasa", "Satire", "Percintaan", "Tinggi")
     komedi.setNaskah(naskah4)
     komedi.setPanggung(panggung4)
     komedi.setDaftarAktor(aktor_komedi)
