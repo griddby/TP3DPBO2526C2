@@ -24,22 +24,46 @@ void tampilkan_semua_data(Pertunjukan** daftar_pertunjukan, int jml_pertunjukan,
     // Looping untuk setiap objek di dalam array daftar_pertunjukan
     for(int idx_p = 0; idx_p < jml_pertunjukan; ++idx_p) {
         Pertunjukan* p = daftar_pertunjukan[idx_p];
-
         // Mengambil kategori dari tiap subclass (penerapan Polymorphism)
         string kategori = p->getKategori();
-
         // Mencetak ID, Judul, dan kategori pertunjukan
         cout << endl;
         cout << idx_p + 1 << ". " << p->getIdPertunjukan() << endl;
         cout << p->getJudul() << " (" << kategori << ")" << endl;
+        cout << "- Durasi    : " << p->getDurasi() << " Menit" << endl;
+        cout << "- Sutradara : " << p->getSutradara() << endl;
+
+        // Menampilkan atribut khusus sesuai dengan jenis pertunjukan
+        if(kategori == "Drama") {
+            Drama* drama = (Drama*) p;
+            cout << "- Atribut Drama:" << endl;
+            cout << "     - Tema          : " << drama->getTema() << endl;
+            cout << "     - Jumlah Babak  : " << drama->getJumlahBabak() << endl;
+            cout << "     - Konflik Utama : " << drama->getKonflikUtama() << endl;
+        } else if(kategori == "Musikal") {
+            Musikal* musikal = (Musikal*) p;
+
+            cout << "- Atribut Musikal:" << endl;
+            cout << "     - Jumlah Lagu  : " << musikal->getJumlahLagu() << endl;
+            cout << "     - Durasi Musik : " << musikal->getDurasiMusik() << " Menit" << endl;
+            cout << "     - Tema Musik   : " << musikal->getTemaMusik() << endl;
+        } else if(kategori == "Komedi") {
+            Komedi* komedi = (Komedi*) p;
+
+            cout << "- Atribut Komedi:" << endl;
+            cout << "     - Gaya Humor    : " << komedi->getGayaHumor() << endl;
+            cout << "     - Tema Cerita   : " << komedi->getTemaCerita() << endl;
+            cout << "     - Tingkat Humor : " << komedi->getTingkatHumor() << endl;
+        }
 
         // Mengambil data Naskah dari dalam objek Pertunjukan (Composition)
         Naskah* naskah = p->getNaskah();
         cout << "- Naskah:" << endl;
         if(naskah != NULL) {
-            cout << "     - ID Naskah : " << naskah->getIdNaskah() << endl;
-            cout << "     - Penulis   : " << naskah->getPenulis() << endl;
-            cout << "     - Halaman   : " << naskah->getJumlahHalaman() << " Halaman" << endl;
+            cout << "     - ID Naskah      : " << naskah->getIdNaskah() << endl;
+            cout << "     - Penulis        : " << naskah->getPenulis() << endl;
+            cout << "     - Halaman        : " << naskah->getJumlahHalaman() << " Halaman" << endl;
+            cout << "     - Bahasa         : " << naskah->getBahasa() << endl;
         } else {
             cout << "     - Belum ada naskah" << endl;
         }
@@ -48,9 +72,10 @@ void tampilkan_semua_data(Pertunjukan** daftar_pertunjukan, int jml_pertunjukan,
         Panggung* panggung = p->getPanggung();
         cout << "- Panggung:" << endl;
         if(panggung != NULL) {
-            cout << "     - ID Panggung : " << panggung->getIdPanggung() << endl;
-            cout << "     - Nama        : " << panggung->getNamaPanggung() << endl;
-            cout << "     - Kapasitas   : " << panggung->getKapasitas() << " Penonton" << endl;
+            cout << "     - ID Panggung    : " << panggung->getIdPanggung() << endl;
+            cout << "     - Nama           : " << panggung->getNamaPanggung() << endl;
+            cout << "     - Kapasitas      : " << panggung->getKapasitas() << " Penonton" << endl;
+            cout << "     - Jenis Panggung : " << panggung->getJenisPanggung() << endl;
         } else {
             cout << "     - Belum ada panggung" << endl;
         }
@@ -69,7 +94,6 @@ void tampilkan_semua_data(Pertunjukan** daftar_pertunjukan, int jml_pertunjukan,
             for(int i = 0; i < p->getJumlahAktor(); ++i) {
                 string peran_clean = aktor_list[i]->getPeran();
                 string peran_baru = "";
-
                 // Menghapus tanda kurung '(' dan ')' dari peran aktor
                 for(int j = 0; j < peran_clean.length(); ++j) {
                     if(peran_clean[j] != '(' && peran_clean[j] != ')') {
@@ -137,7 +161,6 @@ int main() {
     // Menyiapkan data Naskah dan Panggung untuk pertunjukan pertama
     Naskah* naskah1 = new Naskah("NSK-01", "Lin-Manuel Miranda", 150, "Inggris");
     Panggung* panggung1 = new Panggung("PNG-A", "Richard Rodgers Theatre", 1319, "Proscenium");
-    
     // Menyiapkan array berisi data aktor
     Aktor* aktor_hamilton[3] = {
         new Aktor("AKT-01", "Lin-Manuel Miranda", 40, "Alexander Hamilton", 15),
@@ -192,24 +215,24 @@ int main() {
     bunga->setPanggung(panggung3);
     bunga->setDaftarAktor(aktor_bunga, 3);
 
-    // Menyiapkan data pertunjukan keempat
-    Naskah* naskah4 = new Naskah("NSK-04", "Garin Nugroho", 135, "Indonesia");
-    Panggung* panggung4 = new Panggung("PNG-D", "Teater Besar Taman Ismail Marzuki", 1200, "Proscenium");
-    Aktor* aktor_opera[3] = {
-        new Aktor("AKT-10", "Artika Sari Devi", 46, "Siti", 18),
-        new Aktor("AKT-11", "Retno Maruti", 64, "Rama", 35),
-        new Aktor("AKT-12", "Eko Supriyanto", 49, "Ludiro", 25)
+    // Menyiapkan data pertunjukan keempat berjenis Komedi
+    Naskah* naskah4 = new Naskah("NSK-04", "Raditya Dika", 100, "Indonesia");
+    Panggung* panggung4 = new Panggung("PNG-D", "Teater Jakarta", 500, "Proscenium");
+    Aktor* aktor_komedi[3] = {
+        new Aktor("AKT-10", "Raditya Dika", 41, "Pemain Utama", 15),
+        new Aktor("AKT-11", "Ernest Prakasa", 43, "Sahabat", 12),
+        new Aktor("AKT-12", "Ge Pamungkas", 37, "Pemeran Pendukung", 10)
     };
 
-    // Membuat objek Drama keempat dan memasukkan komponennya
-    Drama* opera_jawa = new Drama("PRT-04", "Opera Jawa", 140, "Garin Nugroho", "Budaya Jawa", 4, "Kehidupan dan tradisi Jawa");
-    opera_jawa->setNaskah(naskah4);
-    opera_jawa->setPanggung(panggung4);
-    opera_jawa->setDaftarAktor(aktor_opera, 3);
+    // Membuat objek Komedi dan memasukkan komponennya
+    Komedi* komedi = new Komedi("PRT-04", "Cinta Dalam Komedi", 115, "Ernest Prakasa", "Satire", "Percintaan", "Tinggi");
+    komedi->setNaskah(naskah4);
+    komedi->setPanggung(panggung4);
+    komedi->setDaftarAktor(aktor_komedi, 3);
 
-    // Memasukkan objek Drama yang baru ke dalam array utama
+    // Memasukkan objek Drama dan Komedi yang baru ke dalam array utama
     daftar_pertunjukan[jml_pertunjukan++] = bunga;
-    daftar_pertunjukan[jml_pertunjukan++] = opera_jawa;
+    daftar_pertunjukan[jml_pertunjukan++] = komedi;
 
     // Menampilkan kondisi data setelah penambahan
     tampilkan_semua_data(daftar_pertunjukan, jml_pertunjukan, "DATA SESUDAH DITAMBAHKAN");
